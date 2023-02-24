@@ -6,6 +6,8 @@ import PlayerBox from '../Player/PlayerBox';
 export default function SetupForm() {
 	const testDefaultPlayers: Player[] = [{ name: 'Seb' }, { name: 'Dec' }, { name: 'Jake' }, { name: 'Charlie' }];
 	const [teamSize, setTeamSize] = useState(5);
+	const [team1Name, setTeam1Name] = useState('Lights');
+	const [team2Name, setTeam2Name] = useState('Darks');
 	const [players, setPlayers] = useState<Player[]>(testDefaultPlayers);
 	const [addingPlayer, setAddingPlayer] = useState(false);
 
@@ -13,10 +15,17 @@ export default function SetupForm() {
 		setTeamSize(+event.target.value);
 	}
 
+	function onTeamNameChanged(event: React.ChangeEvent<HTMLInputElement>, team: number) {
+		if (team === 1) {
+			setTeam1Name(event.target.value);
+		} else {
+			setTeam2Name(event.target.value);
+		}
+	}
+
 	function onNewPlayerAdded(player: Player) {
 		const newPlayers = players;
 		newPlayers.push(player);
-		console.log(newPlayers);
 		setPlayers(newPlayers);
 		setAddingPlayer(false);
 	}
@@ -40,6 +49,28 @@ export default function SetupForm() {
 					<h3>Max Team Size</h3>
 				</label>
 				<input type="number" name="team-size" value={teamSize} min="1" max="11" onChange={onTeamSizeChanged} />
+				<label htmlFor="team-1-name">
+					<h3>Team 1 Name</h3>
+				</label>
+				<input
+					type="text"
+					name="team-1-name"
+					value={team1Name}
+					onChange={(event) => {
+						onTeamNameChanged(event, 1);
+					}}
+				/>
+				<label htmlFor="team-2-name">
+					<h3>Team 2 Name</h3>
+				</label>
+				<input
+					type="text"
+					name="team-2-name"
+					value={team2Name}
+					onChange={(event) => {
+						onTeamNameChanged(event, 2);
+					}}
+				/>
 			</form>
 			<br />
 			<h3>Players</h3>
