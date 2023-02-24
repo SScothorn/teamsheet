@@ -1,0 +1,29 @@
+.Setup__Container {
+	display: flex;
+	flex-wrap: wrap;
+	justify-content: center;
+	align-items: stretch;
+	border: 1px;
+	border-style: solid;
+	border-color: blue;
+}
+
+.Setup__Section {
+	background-color: #EEEEEE;
+	margin: 1rem;
+	padding: 1rem;
+	display: flex;
+	flex-direction: column;
+	min-width: 300px;
+	border: 1px;
+	border-style: solid;
+	border-color: black;
+}
+
+.Setup__Settings {
+
+}
+
+.Setup__Players {
+
+}

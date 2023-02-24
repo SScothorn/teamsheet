@@ -1,0 +1,6 @@
+.PlayerBox {
+	border-radius: 0.25rem;
+	margin: 5px 0.5rem;
+	padding: 2px;
+	background-color: lightgrey;
+}

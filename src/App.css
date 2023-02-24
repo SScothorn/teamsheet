@@ -7,6 +7,10 @@
 	--text-color: black;
 }
 
+.App {
+	margin: 1rem
+}
+
 h3 {
 	margin: 0;
 }
