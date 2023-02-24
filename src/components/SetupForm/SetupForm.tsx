@@ -25,7 +25,7 @@ export default function SetupForm() {
 	}
 
 	const playersList = players.map((player, i) => {
-		console.log(player);
+		// console.log(player);
 		return <div key={i}>{player.name}</div>;
 	});
 
