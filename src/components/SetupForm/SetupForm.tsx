@@ -14,6 +14,22 @@ export default function SetupForm() {
 		{ name: 'Owen' },
 		{ name: 'AJ' },
 		{ name: 'Birksy' },
+		{ name: 'Seb' },
+		{ name: 'Dec' },
+		{ name: 'Jake' },
+		{ name: 'Charlie' },
+		{ name: 'Stan' },
+		{ name: 'Owen' },
+		{ name: 'AJ' },
+		{ name: 'Birksy' },
+		{ name: 'Seb' },
+		{ name: 'Dec' },
+		{ name: 'Jake' },
+		{ name: 'Charlie' },
+		{ name: 'Stan' },
+		{ name: 'Owen' },
+		{ name: 'AJ' },
+		{ name: 'Birksy' },
 	];
 	const [teamSize, setTeamSize] = useState(3);
 	const [team1Name, setTeam1Name] = useState('Lights');

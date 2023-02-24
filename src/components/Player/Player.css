@@ -1,6 +1,40 @@
 .PlayerBox {
+	display: flex;
+	justify-content: space-between;
+	align-items: center;
 	border-radius: 0.25rem;
 	margin: 5px 0.5rem;
 	padding: 2px;
 	background-color: lightgrey;
+}
+
+.PlayerBox span {
+	margin: 0 0.25rem
+}
+
+.PlayerBox__DeleteButton {
+	border-radius: 25%;
+	margin: 0 0.5rem;
+	padding: 0;
+	display: flex;
+	align-items: center;
+	width: auto;
+	height: 100%;
+	align-items: center;
+	background-color: inherit;
+	border: none;
+	aspect-ratio: 1/1;
+}
+  
+.PlayerBox__DeleteButton:hover {
+	filter: brightness(0.95);
+}
+  
+.PlayerBox__DeleteButton:active {
+	filter: brightness(0.9);
+}
+
+.PlayerBox__DeleteButton svg {
+	width: auto;
+	height: 100%;
 }
