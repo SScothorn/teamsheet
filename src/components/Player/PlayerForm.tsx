@@ -1,5 +1,6 @@
 import { SyntheticEvent, useEffect, useState } from 'react';
 import { Player } from './Player';
+import { v4 as uuidv4 } from 'uuid';
 
 export type PlayerFormProps = {
 	onSubmit: (player: Player) => void;
@@ -21,6 +22,7 @@ export default function PlayerForm(props: PlayerFormProps) {
 			return;
 		}
 		const player: Player = {
+			id: uuidv4(),
 			name,
 		};
 		// console.log(player);

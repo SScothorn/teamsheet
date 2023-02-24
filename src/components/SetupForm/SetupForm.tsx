@@ -2,36 +2,37 @@ import { useState } from 'react';
 import { Player } from '../Player/Player';
 import PlayerForm from '../Player/PlayerForm';
 import PlayerBox from '../Player/PlayerBox';
+import { v4 as uuidv4 } from 'uuid';
 import './SetupForm.css';
 
 export default function SetupForm() {
 	const testDefaultPlayers: Player[] = [
-		{ name: 'Seb' },
-		{ name: 'Dec' },
-		{ name: 'Jake' },
-		{ name: 'Charlie' },
-		{ name: 'Stan' },
-		{ name: 'Owen' },
-		{ name: 'AJ' },
-		{ name: 'Birksy' },
-		{ name: 'Seb' },
-		{ name: 'Dec' },
-		{ name: 'Jake' },
-		{ name: 'Charlie' },
-		{ name: 'Stan' },
-		{ name: 'Owen' },
-		{ name: 'AJ' },
-		{ name: 'Birksy' },
-		{ name: 'Seb' },
-		{ name: 'Dec' },
-		{ name: 'Jake' },
-		{ name: 'Charlie' },
-		{ name: 'Stan' },
-		{ name: 'Owen' },
-		{ name: 'AJ' },
-		{ name: 'Birksy' },
+		{ id: uuidv4(), name: 'Seb' },
+		{ id: uuidv4(), name: 'Dec' },
+		{ id: uuidv4(), name: 'Jake' },
+		{ id: uuidv4(), name: 'Charlie' },
+		{ id: uuidv4(), name: 'Stan' },
+		{ id: uuidv4(), name: 'Owen' },
+		{ id: uuidv4(), name: 'AJ' },
+		{ id: uuidv4(), name: 'Birksy' },
+		{ id: uuidv4(), name: 'Seb' },
+		{ id: uuidv4(), name: 'Dec' },
+		{ id: uuidv4(), name: 'Jake' },
+		{ id: uuidv4(), name: 'Charlie' },
+		{ id: uuidv4(), name: 'Stan' },
+		{ id: uuidv4(), name: 'Owen' },
+		{ id: uuidv4(), name: 'AJ' },
+		{ id: uuidv4(), name: 'Birksy' },
+		{ id: uuidv4(), name: 'Seb' },
+		{ id: uuidv4(), name: 'Dec' },
+		{ id: uuidv4(), name: 'Jake' },
+		{ id: uuidv4(), name: 'Charlie' },
+		{ id: uuidv4(), name: 'Stan' },
+		{ id: uuidv4(), name: 'Owen' },
+		{ id: uuidv4(), name: 'AJ' },
+		{ id: uuidv4(), name: 'Birksy' },
 	];
-	const [teamSize, setTeamSize] = useState(3);
+	const [teamSize, setTeamSize] = useState(6);
 	const [team1Name, setTeam1Name] = useState('Lights');
 	const [team2Name, setTeam2Name] = useState('Darks');
 	const [players, setPlayers] = useState<Player[]>(testDefaultPlayers);
@@ -50,7 +51,7 @@ export default function SetupForm() {
 	}
 
 	function onNewPlayerAdded(player: Player) {
-		const newPlayers = players;
+		const newPlayers = [...players];
 		newPlayers.push(player);
 		setPlayers(newPlayers);
 		setAddingPlayer(false);
@@ -60,12 +61,35 @@ export default function SetupForm() {
 		setAddingPlayer(false);
 	}
 
-	const playersList = players.slice(0, teamSize * 2).map((player, i) => {
-		return <PlayerBox player={player} key={i} />;
+	function onPlayerRemoved(id: string) {
+		const newPlayers = players.filter((player) => {
+			return player.id !== id;
+		});
+		setPlayers(newPlayers);
+	}
+
+	const playersList = players.slice(0, teamSize * 2).map((player) => {
+		return (
+			<PlayerBox
+				player={player}
+				key={player.id}
+				onRemoveClicked={() => {
+					onPlayerRemoved(player.id);
+				}}
+			/>
+		);
 	});
 
-	const subsList = players.slice(teamSize * 2).map((player, i) => {
-		return <PlayerBox player={player} key={i} />;
+	const subsList = players.slice(teamSize * 2).map((player) => {
+		return (
+			<PlayerBox
+				player={player}
+				key={player.id}
+				onRemoveClicked={() => {
+					onPlayerRemoved(player.id);
+				}}
+			/>
+		);
 	});
 
 	return (

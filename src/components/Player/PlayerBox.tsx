@@ -4,18 +4,15 @@ import './Player.css';
 
 export type PlayerBoxProps = {
 	player: Player;
+	onRemoveClicked: () => void;
 };
 
 export default function PlayerBox(props: PlayerBoxProps) {
+	const { onRemoveClicked } = props;
 	return (
 		<div className="PlayerBox">
 			<span>{props.player.name}</span>
-			<button
-				className="PlayerBox__DeleteButton"
-				onClick={() => {
-					console.log(`delete me`);
-				}}
-			>
+			<button className="PlayerBox__DeleteButton" onClick={onRemoveClicked}>
 				<IoIosRemove />
 			</button>
 		</div>
