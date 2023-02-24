@@ -55,7 +55,9 @@ export default function PlayerForm(props: PlayerFormProps) {
 		<>
 			{shouldShowErrors && errorText}
 			<form>
-				<label htmlFor="name">Name</label>
+				<label htmlFor="name">
+					<h3>Name</h3>
+				</label>
 				<input type="text" name="name" value={name} onChange={onNameChanged} />
 			</form>
 			<button onClick={handleSubmit}>Save</button>

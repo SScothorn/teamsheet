@@ -1,0 +1,12 @@
+* {
+	box-sizing: border-box;
+	
+}
+
+:root {
+	--text-color: black;
+}
+
+h3 {
+	margin: 0;
+}

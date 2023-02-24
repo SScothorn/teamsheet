@@ -36,13 +36,22 @@ export default function SetupForm() {
 	return (
 		<>
 			<form>
-				<label htmlFor="team-size">Max Team Size</label>
+				<label htmlFor="team-size">
+					<h3>Max Team Size</h3>
+				</label>
 				<input type="number" name="team-size" value={teamSize} min="1" max="11" onChange={onTeamSizeChanged} />
 			</form>
+			<br />
 			<h3>Players</h3>
 			{playersList}
-			{subsList.length > 0 && <h3>Subs</h3>}
-			{subsList}
+			{subsList.length > 0 && (
+				<>
+					<br />
+					<h3>Subs</h3>
+					{subsList}
+				</>
+			)}
+			<br />
 			{addingPlayer ? (
 				<PlayerForm onSubmit={onNewPlayerAdded} onCancel={onNewPlayerCancelled} />
 			) : (
