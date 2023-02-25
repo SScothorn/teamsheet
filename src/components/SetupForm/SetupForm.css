@@ -9,21 +9,25 @@
 }
 
 .Setup__Section {
-	background-color: #EEEEEE;
+	/* background-color: #EEEEEE; */
 	margin: 1rem;
 	padding: 1rem;
 	display: flex;
 	flex-direction: column;
 	min-width: 300px;
-	border: 1px;
+	/* border: 1px;
 	border-style: solid;
-	border-color: black;
+	border-color: black; */
 }
 
 .Setup__Settings {
 
 }
 
-.Setup__Players {
+.Setup__PlayersContainer {
+	flex-direction: row;
+}
 
+.Setup__PlayersList {
+	flex-direction: column;
 }

@@ -1,11 +1,30 @@
 .PlayerBox {
 	display: flex;
-	justify-content: space-between;
 	align-items: center;
+}
+
+.PlayerBox__Background {
 	border-radius: 0.25rem;
-	margin: 5px 0.5rem;
+	margin: 2px 2px;
 	padding: 2px;
 	background-color: lightgrey;
+}
+
+.PlayerBox__Number {
+	display: flex;
+	min-width: 2rem;
+	align-items: center;
+	justify-content: center;
+}
+
+.PlayerBox__Name {
+	display: flex;
+	justify-content: space-between;
+	align-items: center;
+	/* border: 1px;
+	border-style: solid;
+	border-color: black; */
+	width: 100%;
 }
 
 .PlayerBox span {

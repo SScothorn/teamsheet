@@ -68,9 +68,10 @@ export default function SetupForm() {
 		setPlayers(newPlayers);
 	}
 
-	const playersList = players.slice(0, teamSize * 2).map((player) => {
+	const playersList = players.slice(0, teamSize * 2).map((player, i) => {
 		return (
 			<PlayerBox
+				index={i + 1}
 				player={player}
 				key={player.id}
 				onRemoveClicked={() => {
@@ -80,9 +81,10 @@ export default function SetupForm() {
 		);
 	});
 
-	const subsList = players.slice(teamSize * 2).map((player) => {
+	const subsList = players.slice(teamSize * 2).map((player, i) => {
 		return (
 			<PlayerBox
+				index={i + teamSize * 2 + 1}
 				player={player}
 				key={player.id}
 				onRemoveClicked={() => {
@@ -91,6 +93,18 @@ export default function SetupForm() {
 			/>
 		);
 	});
+
+	const addPlayer = addingPlayer ? (
+		<PlayerForm onSubmit={onNewPlayerAdded} onCancel={onNewPlayerCancelled} />
+	) : (
+		<button
+			onClick={() => {
+				setAddingPlayer(true);
+			}}
+		>
+			Add Player
+		</button>
+	);
 
 	return (
 		<div className="Setup__Container">
@@ -123,28 +137,23 @@ export default function SetupForm() {
 				/>
 			</form>
 			<div className="Setup__Section">
-				<h3>Players</h3>
-				{playersList}
-				{subsList.length > 0 && (
-					<>
-						<br />
+				<div className="Setup__PlayersList">
+					<h3>Players</h3>
+					{playersList}
+				</div>
+
+				{subsList.length === 0 && addPlayer}
+			</div>
+			{subsList.length > 0 && (
+				<div className="Setup__Section">
+					<div className="Setup__PlayersList">
 						<h3>Subs</h3>
 						{subsList}
-					</>
-				)}
-				<br />
-				{addingPlayer ? (
-					<PlayerForm onSubmit={onNewPlayerAdded} onCancel={onNewPlayerCancelled} />
-				) : (
-					<button
-						onClick={() => {
-							setAddingPlayer(true);
-						}}
-					>
-						Add Player
-					</button>
-				)}
-			</div>
+					</div>
+
+					{subsList.length > 0 && addPlayer}
+				</div>
+			)}
 		</div>
 	);
 }
