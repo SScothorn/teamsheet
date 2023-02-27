@@ -1,3 +1,4 @@
+import { useNavigate } from 'react-router-dom';
 import { Player } from '../../components/Player/Player';
 import PlayerBox from '../../components/Player/PlayerBox';
 import { Team } from '../../components/Team/Team';
@@ -11,6 +12,8 @@ export type OutputProps = {
 
 export default function Output(props: OutputProps) {
 	const { teams, players, setPlayers, generateLineup } = props;
+
+	const navigate = useNavigate();
 	const test = teams.map((team, teamIndex) => {
 		return (
 			<div className="Section">
@@ -32,5 +35,16 @@ export default function Output(props: OutputProps) {
 			</div>
 		);
 	});
-	return <div className="SectionContainer">{test}</div>;
+	return (
+		<>
+			<button
+				onClick={() => {
+					navigate('/setup');
+				}}
+			>
+				Back To Setup
+			</button>
+			<div className="SectionContainer">{test}</div>
+		</>
+	);
 }
