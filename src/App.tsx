@@ -7,6 +7,7 @@ import { shuffle } from './util/shuffle';
 import { Team } from './components/Team/Team';
 import { Routes, Route, Navigate, useNavigate } from 'react-router-dom';
 import { outputPlayersAndTeamsToLogs } from './util/logging';
+import Output from './pages/Output/Output';
 
 function App() {
 	const [lineupReady, setLineupReady] = useState(false);
@@ -64,7 +65,10 @@ function App() {
 						/>
 					}
 				/>
-				<Route path="/output" element={lineupReady ? <></> : <Navigate to="/setup" />} />
+				<Route
+					path="/output"
+					element={lineupReady ? <Output teams={teams} players={players} setPlayers={setPlayers} generateLineup={generateLineup} /> : <Navigate to="/setup" />}
+				/>
 				<Route path="*" element={<Navigate to="/setup" />} />
 			</Routes>
 		</div>
