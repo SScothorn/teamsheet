@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { SyntheticEvent, useState } from 'react';
 import { Player } from '../Player/Player';
 import PlayerForm from '../Player/PlayerForm';
 import PlayerBox from '../Player/PlayerBox';
@@ -68,6 +68,11 @@ export default function SetupForm() {
 		setPlayers(newPlayers);
 	}
 
+	function onGenerateClicked(event: SyntheticEvent) {
+		event.preventDefault();
+		console.log(`Generate Pressed`);
+	}
+
 	const playersList = players.slice(0, teamSize * 2).map((player, i) => {
 		return (
 			<PlayerBox
@@ -135,6 +140,10 @@ export default function SetupForm() {
 						onTeamNameChanged(event, 2);
 					}}
 				/>
+
+				<button className="Setup__GenerateButton" onClick={onGenerateClicked}>
+					Generate Lineup
+				</button>
 			</form>
 			<div className="Setup__Section">
 				<div className="Setup__PlayersList">
