@@ -14,19 +14,26 @@ function App() {
 	function generateLineup() {
 		console.clear();
 		console.log(`Generate Pressed`);
-		// Randomly pick a lineup
-		const eligiblePlayers = shuffle(players.slice(0, teamSize * 2)).map((player, index) => {
+
+		let updatedPlayers = [...players];
+
+		// Find the eligible players
+		const eligiblePlayers = shuffle(updatedPlayers.slice(0, teamSize * 2));
+
+		// Assign them their teams at random.
+		eligiblePlayers.forEach((player, index) => {
 			player.team = index % 2;
-			return player;
 		});
+
+		// Find the ineligible players
+		const ineligiblePlayers = updatedPlayers.slice(teamSize * 2);
 		// Set rest to have no team assigned, incase team size has been reduced.
-		const ineligiblePlayers = players.slice(teamSize * 2).map((player) => {
+		ineligiblePlayers.forEach((player) => {
 			player.team = undefined;
-			return player;
 		});
-		const updatedPlayers = [...eligiblePlayers, ...ineligiblePlayers];
+
 		setPlayers(updatedPlayers);
-		outputLineupToLogs(updatedPlayers);
+		outputPlayersToLogs(updatedPlayers);
 	}
 
 	function outputLineupToLogs(lineup: Player[] = players) {
@@ -43,6 +50,13 @@ function App() {
 				console.log(`${player.name}`);
 			});
 	}
+
+	function outputPlayersToLogs(allPlayers: Player[] = players) {
+		allPlayers.forEach((player) => {
+			console.log(`${player.team} - ${player.name}`);
+		});
+	}
+
 	return (
 		<div className="App">
 			<Setup
