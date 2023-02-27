@@ -1,4 +1,4 @@
-import { SyntheticEvent, useState } from 'react';
+import { Fragment, SyntheticEvent, useState } from 'react';
 import './Setup.css';
 import { Player } from '../../components/Player/Player';
 import PlayerBox from '../../components/Player/PlayerBox';
@@ -59,7 +59,7 @@ export default function Setup(props: SetupProps) {
 
 	const teamNames = teams.map((team, index) => {
 		return (
-			<>
+			<Fragment key={index}>
 				<label htmlFor={`team-${index + 1}-name`}>
 					<h3>{`Team ${index + 1} Name`}</h3>
 				</label>
@@ -71,7 +71,7 @@ export default function Setup(props: SetupProps) {
 						onTeamNameChanged(event, index);
 					}}
 				/>
-			</>
+			</Fragment>
 		);
 	});
 
