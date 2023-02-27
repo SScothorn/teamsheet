@@ -3,33 +3,35 @@ import './Setup.css';
 import { Player } from '../../components/Player/Player';
 import PlayerBox from '../../components/Player/PlayerBox';
 import PlayerForm from '../../components/Player/PlayerForm';
+import { Team } from '../../components/Team/Team';
 
 export type SetupProps = {
 	teamSize: number;
 	setTeamSize: (value: React.SetStateAction<number>) => void;
-	team1Name: string;
-	setTeam1Name: (value: React.SetStateAction<string>) => void;
-	team2Name: string;
-	setTeam2Name: (value: React.SetStateAction<string>) => void;
+	teams: Team[];
+	setTeams: (value: React.SetStateAction<Team[]>) => void;
 	players: Player[];
 	setPlayers: (value: React.SetStateAction<Player[]>) => void;
 	generateLineup: () => void;
 };
 
 export default function Setup(props: SetupProps) {
+	const { teamSize, setTeamSize, teams, setTeams, players, setPlayers, generateLineup } = props;
 	const [addingPlayer, setAddingPlayer] = useState(false);
-	const { teamSize, setTeamSize, team1Name, setTeam1Name, team2Name, setTeam2Name, players, setPlayers, generateLineup } = props;
+
+	// For code clarity
+	function numberOfTeams() {
+		return teams.length;
+	}
 
 	function onTeamSizeChanged(event: React.ChangeEvent<HTMLInputElement>) {
 		setTeamSize(+event.target.value);
 	}
 
-	function onTeamNameChanged(event: React.ChangeEvent<HTMLInputElement>, team: number) {
-		if (team === 1) {
-			setTeam1Name(event.target.value);
-		} else {
-			setTeam2Name(event.target.value);
-		}
+	function onTeamNameChanged(event: React.ChangeEvent<HTMLInputElement>, teamIndex: number) {
+		const updatedTeams = [...teams];
+		updatedTeams[teamIndex].name = event.target.value;
+		setTeams(updatedTeams);
 	}
 
 	function onNewPlayerAdded(player: Player) {
@@ -55,7 +57,25 @@ export default function Setup(props: SetupProps) {
 		generateLineup();
 	}
 
-	const playersList = players.slice(0, teamSize * 2).map((player, i) => {
+	const teamNames = teams.map((team, index) => {
+		return (
+			<>
+				<label htmlFor={`team-${index + 1}-name`}>
+					<h3>{`Team ${index + 1} Name`}</h3>
+				</label>
+				<input
+					type="text"
+					name={`team-${index + 1}-name`}
+					value={team.name}
+					onChange={(event) => {
+						onTeamNameChanged(event, index);
+					}}
+				/>
+			</>
+		);
+	});
+
+	const playersList = players.slice(0, teamSize * numberOfTeams()).map((player, i) => {
 		return (
 			<PlayerBox
 				index={i + 1}
@@ -68,10 +88,10 @@ export default function Setup(props: SetupProps) {
 		);
 	});
 
-	const subsList = players.slice(teamSize * 2).map((player, i) => {
+	const subsList = players.slice(teamSize * numberOfTeams()).map((player, i) => {
 		return (
 			<PlayerBox
-				index={i + teamSize * 2 + 1}
+				index={i + teamSize * numberOfTeams() + 1}
 				player={player}
 				key={player.id}
 				onRemoveClicked={() => {
@@ -100,28 +120,7 @@ export default function Setup(props: SetupProps) {
 					<h3>Max Team Size</h3>
 				</label>
 				<input type="number" name="team-size" value={teamSize} min="1" max="11" onChange={onTeamSizeChanged} />
-				<label htmlFor="team-1-name">
-					<h3>Team 1 Name</h3>
-				</label>
-				<input
-					type="text"
-					name="team-1-name"
-					value={team1Name}
-					onChange={(event) => {
-						onTeamNameChanged(event, 1);
-					}}
-				/>
-				<label htmlFor="team-2-name">
-					<h3>Team 2 Name</h3>
-				</label>
-				<input
-					type="text"
-					name="team-2-name"
-					value={team2Name}
-					onChange={(event) => {
-						onTeamNameChanged(event, 2);
-					}}
-				/>
+				{teamNames}
 
 				<button className="Setup__GenerateButton" onClick={onGenerateClicked}>
 					Generate Lineup
