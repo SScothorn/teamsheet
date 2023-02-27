@@ -11,7 +11,7 @@
 .Setup__Section {
 	/* background-color: #EEEEEE; */
 	margin: 1rem;
-	padding: 1rem;
+	padding: 0;
 	display: flex;
 	flex-direction: column;
 	min-width: 300px;
