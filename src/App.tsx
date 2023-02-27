@@ -5,11 +5,15 @@ import { Player } from './components/Player/Player';
 import Setup from './pages/Setup/Setup';
 import { shuffle } from './util/shuffle';
 import { Team } from './components/Team/Team';
+import { Routes, Route, Navigate, useNavigate } from 'react-router-dom';
+import { outputPlayersAndTeamsToLogs } from './util/logging';
 
 function App() {
+	const [lineupReady, setLineupReady] = useState(false);
 	const [teamSize, setTeamSize] = useState(2);
 	const [teams, setTeams] = useState<Team[]>([{ name: 'Lights' }, { name: 'Darks' }]);
 	const [players, setPlayers] = useState<Player[]>(testDefaultPlayers);
+	const navigate = useNavigate();
 
 	// For code clarity
 	function numberOfTeams() {
@@ -38,32 +42,31 @@ function App() {
 		});
 
 		setPlayers(updatedPlayers);
-		outputLineupToLogs(updatedPlayers);
-		// outputPlayersToLogs(updatedPlayers);
-	}
-
-	function outputLineupToLogs(lineup: Player[] = players) {
-		console.log(`--- LINEUP ---`);
-		teams.forEach((team, index) => {
-			console.log(`- ${team.name}:`);
-			lineup
-				.filter((player) => player.team === index)
-				.forEach((player) => {
-					console.log(`${player.name}`);
-				});
-		});
-	}
-
-	function outputPlayersToLogs(allPlayers: Player[] = players) {
-		console.log(`--- ALL PLAYERS ---`);
-		allPlayers.forEach((player) => {
-			console.log(`${player.team ?? `Sub`} - ${player.name}`);
-		});
+		// outputPlayersAndTeamsToLogs(updatedPlayers, teams);
+		setLineupReady(true);
+		navigate('/output');
 	}
 
 	return (
 		<div className="App">
-			<Setup teamSize={teamSize} setTeamSize={setTeamSize} teams={teams} setTeams={setTeams} players={players} setPlayers={setPlayers} generateLineup={generateLineup} />
+			<Routes>
+				<Route
+					path="/setup"
+					element={
+						<Setup
+							teamSize={teamSize}
+							setTeamSize={setTeamSize}
+							teams={teams}
+							setTeams={setTeams}
+							players={players}
+							setPlayers={setPlayers}
+							generateLineup={generateLineup}
+						/>
+					}
+				/>
+				<Route path="/output" element={lineupReady ? <></> : <Navigate to="/setup" />} />
+				<Route path="*" element={<Navigate to="/setup" />} />
+			</Routes>
 		</div>
 	);
 }
