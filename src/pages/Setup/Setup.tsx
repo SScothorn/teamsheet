@@ -114,20 +114,20 @@ export default function Setup(props: SetupProps) {
 	);
 
 	return (
-		<div className="Setup__Container">
-			<form className="Setup__Section">
+		<div className="SectionContainer">
+			<form className="Section">
 				<label htmlFor="team-size">
 					<h3>Max Team Size</h3>
 				</label>
 				<input type="number" name="team-size" value={teamSize} min="1" max="11" onChange={onTeamSizeChanged} />
 				{teamNames}
 
-				<button className="Setup__GenerateButton" onClick={onGenerateClicked}>
+				<button className="GenerateButton" onClick={onGenerateClicked}>
 					Generate Lineup
 				</button>
 			</form>
-			<div className="Setup__Section">
-				<div className="Setup__PlayersList">
+			<div className="Section">
+				<div className="PlayersList">
 					<h3>Players</h3>
 					{playersList}
 				</div>
@@ -135,8 +135,8 @@ export default function Setup(props: SetupProps) {
 				{subsList.length === 0 && addPlayer}
 			</div>
 			{subsList.length > 0 && (
-				<div className="Setup__Section">
-					<div className="Setup__PlayersList">
+				<div className="Section">
+					<div className="PlayersList">
 						<h3>Subs</h3>
 						{subsList}
 					</div>

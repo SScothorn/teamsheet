@@ -13,7 +13,7 @@ export default function Output(props: OutputProps) {
 	const { teams, players, setPlayers, generateLineup } = props;
 	const test = teams.map((team, teamIndex) => {
 		return (
-			<>
+			<div className="Section">
 				<h3>{team.name}</h3>
 				{players
 					.filter((player) => player.team === teamIndex)
@@ -29,8 +29,8 @@ export default function Output(props: OutputProps) {
 							/>
 						);
 					})}
-			</>
+			</div>
 		);
 	});
-	return <div className="Output__Container">{test}</div>;
+	return <div className="SectionContainer">{test}</div>;
 }
