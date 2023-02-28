@@ -11,6 +11,9 @@
 }
 
 .PlayerBox__Number {
+	border: 1px;
+	border-color: transparent;
+	border-style: solid;
 	display: flex;
 	min-width: 2rem;
 	align-items: center;
@@ -18,6 +21,9 @@
 }
 
 .PlayerBox__Name {
+	border: 1px;
+	border-color: transparent;
+	border-style: solid;
 	display: flex;
 	justify-content: space-between;
 	align-items: center;
@@ -35,6 +41,13 @@
 	flex-direction: row;
 	margin: 0 0.5rem;
 	background-color: inherit;
+}
+  
+.PlayerBox__Swap {
+	filter: brightness(1.05);
+	border: 1px;
+	border-color: red;
+	border-style: solid;
 }
 
 .PlayerBox__DeleteButton {

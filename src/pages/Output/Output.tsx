@@ -52,6 +52,7 @@ export default function Output(props: OutputProps) {
 							<PlayerBox
 								index={playerIndex}
 								player={player}
+								swapping={player === playerToSwap}
 								key={player.id}
 								onSwapClicked={() => {
 									onPlayerSwapClicked(player);
