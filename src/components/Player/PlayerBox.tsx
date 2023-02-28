@@ -21,12 +21,12 @@ export default function PlayerBox(props: PlayerBoxProps) {
 				<span>{player.name}</span>
 				<div className="PlayerBox__ButtonsContainer">
 					{onRemoveClicked !== undefined && (
-						<button className="PlayerBox__DeleteButton" onClick={onRemoveClicked}>
+						<button className="PlayerBox__Button" onClick={onRemoveClicked}>
 							<IoIosRemove />
 						</button>
 					)}
 					{onSwapClicked !== undefined && (
-						<button className="PlayerBox__DeleteButton" onClick={onSwapClicked}>
+						<button className="PlayerBox__Button" onClick={onSwapClicked}>
 							<IoIosSwap />
 						</button>
 					)}

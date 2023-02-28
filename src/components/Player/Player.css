@@ -50,7 +50,7 @@
 	border-style: solid;
 }
 
-.PlayerBox__DeleteButton {
+.PlayerBox__Button {
 	display: flex;
 	border-radius: 25%;
 	margin: 0;
@@ -60,15 +60,17 @@
 	border: none;
 }
   
-.PlayerBox__DeleteButton:hover {
-	filter: brightness(0.95);
+@media (hover: hover) {
+	.PlayerBox__Button:hover {
+		filter: brightness(0.95);
+	}
 }
   
-.PlayerBox__DeleteButton:active {
+.PlayerBox__Button:active {
 	filter: brightness(0.9);
 }
 
-.PlayerBox__DeleteButton svg {
+.PlayerBox__Button svg {
 	width: 20px;
 	height: 20px;
 }
