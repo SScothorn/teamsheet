@@ -1,15 +1,16 @@
 import { Player } from './Player';
-import { IoIosRemove } from 'react-icons/io';
+import { IoIosRemove, IoIosSwap } from 'react-icons/io';
 import './Player.css';
 
 export type PlayerBoxProps = {
 	index: number;
 	player: Player;
-	onRemoveClicked: () => void;
+	onRemoveClicked?: () => void;
+	onSwapClicked?: () => void;
 };
 
 export default function PlayerBox(props: PlayerBoxProps) {
-	const { onRemoveClicked, player, index } = props;
+	const { onRemoveClicked, onSwapClicked, player, index } = props;
 	return (
 		<div className="PlayerBox">
 			<div className="PlayerBox__Number PlayerBox__Background">
@@ -17,9 +18,18 @@ export default function PlayerBox(props: PlayerBoxProps) {
 			</div>
 			<div className="PlayerBox__Name PlayerBox__Background">
 				<span>{player.name}</span>
-				<button className="PlayerBox__DeleteButton" onClick={onRemoveClicked}>
-					<IoIosRemove />
-				</button>
+				<div className="PlayerBox__ButtonsContainer">
+					{onRemoveClicked !== undefined && (
+						<button className="PlayerBox__DeleteButton" onClick={onRemoveClicked}>
+							<IoIosRemove />
+						</button>
+					)}
+					{onSwapClicked !== undefined && (
+						<button className="PlayerBox__DeleteButton" onClick={onSwapClicked}>
+							<IoIosSwap />
+						</button>
+					)}
+				</div>
 			</div>
 		</div>
 	);

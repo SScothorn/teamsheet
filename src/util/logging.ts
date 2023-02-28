@@ -11,7 +11,7 @@ function outputLineupToLogs(players: Player[], teams: Team[]) {
 	teams.forEach((team, index) => {
 		console.log(`- ${team.name}:`);
 		players
-			.filter((player) => player.team === index)
+			.filter((player) => player.teamInfo?.team === index)
 			.forEach((player) => {
 				console.log(`${player.name}`);
 			});
@@ -21,6 +21,6 @@ function outputLineupToLogs(players: Player[], teams: Team[]) {
 function outputPlayersToLogs(players: Player[]) {
 	console.log(`--- ALL PLAYERS ---`);
 	players.forEach((player) => {
-		console.log(`${player.team ?? `Sub`} - ${player.name}`);
+		console.log(`${player.teamInfo?.team ?? `Sub`} - ${player.name}`);
 	});
 }

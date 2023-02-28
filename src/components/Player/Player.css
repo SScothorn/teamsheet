@@ -21,9 +21,6 @@
 	display: flex;
 	justify-content: space-between;
 	align-items: center;
-	/* border: 1px;
-	border-style: solid;
-	border-color: black; */
 	width: 100%;
 }
 
@@ -31,18 +28,23 @@
 	margin: 0 0.25rem
 }
 
-.PlayerBox__DeleteButton {
-	border-radius: 25%;
-	margin: 0 0.5rem;
-	padding: 0;
+.PlayerBox__ButtonsContainer {
 	display: flex;
-	align-items: center;
-	width: auto;
-	height: 100%;
+	justify-content:flex-end;
+	align-items:center;
+	flex-direction: row;
+	margin: 0 0.5rem;
+	background-color: inherit;
+}
+
+.PlayerBox__DeleteButton {
+	display: flex;
+	border-radius: 25%;
+	margin: 0;
+	padding: 0;
 	align-items: center;
 	background-color: inherit;
 	border: none;
-	aspect-ratio: 1/1;
 }
   
 .PlayerBox__DeleteButton:hover {
@@ -54,6 +56,6 @@
 }
 
 .PlayerBox__DeleteButton svg {
-	width: auto;
-	height: 100%;
+	width: 20px;
+	height: 20px;
 }
