@@ -12,7 +12,8 @@ import Output from './pages/Output/Output';
 function App() {
 	const [lineupReady, setLineupReady] = useState(false);
 	const [teamSize, setTeamSize] = useState(2);
-	const [teams, setTeams] = useState<Team[]>([{ name: 'Lights' }, { name: 'Darks' }]);
+	// const [teams, setTeams] = useState<Team[]>([{ name: 'Lights' }, { name: 'Darks' }]);
+	const [teams, setTeams] = useState<Team[]>([{ name: 'Lights' }, { name: 'Darks' }, { name: 'Stripes' }, { name: 'Hoops' }]);
 	const [players, setPlayers] = useState<Player[]>(testDefaultPlayers);
 	const navigate = useNavigate();
 
@@ -32,14 +33,17 @@ function App() {
 
 		// Assign them their teams at random.
 		eligiblePlayers.forEach((player, index) => {
-			player.team = index % numberOfTeams();
+			player.teamInfo = {
+				team: index % numberOfTeams(),
+				positionInTeam: Math.floor(index / numberOfTeams()),
+			};
 		});
 
 		// Find the ineligible players
 		const ineligiblePlayers = updatedPlayers.slice(teamSize * numberOfTeams());
 		// Set rest to have no team assigned, incase team size has been reduced.
 		ineligiblePlayers.forEach((player) => {
-			player.team = undefined;
+			player.teamInfo = undefined;
 		});
 
 		setPlayers(updatedPlayers);
