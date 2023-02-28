@@ -1,0 +1,60 @@
+name: Build and Deploy React App to CloudFront
+on:
+  push:
+    branches: [ production ]
+jobs:
+  build-and-deploy:
+    name: Build and Deploy
+    runs-on: ubuntu-latest
+    env:
+      BUCKET: www.teamsheetbuilder.com
+      DIST: build
+      AWS_REGION: eu-west-2
+      DIST_ID: ERZ5R1LTX4BE3
+
+    permissions:
+      id-token: write # This is required for requesting the JWT
+      contents: read
+
+    steps:
+    - name: Checkout
+      uses: actions/checkout@v2
+
+    - name: Configure AWS Credentials
+      uses: aws-actions/configure-aws-credentials@v1-node16
+      with:
+        role-to-assume: arn:aws:iam::733043447271:role/teamsheetbuilder-github-actions
+        aws-region: ${{ env.AWS_REGION }}
+
+    # - name: Extract branch name
+      # shell: bash
+      # run: echo "##[set-output name=branch;]$(echo ${GITHUB_REF#refs/heads/})"
+      # id: extract_branch
+      
+    # - name: Extract commit hash
+      # shell: bash
+      # run: echo "##[set-output name=commit_hash;]$(echo "$GITHUB_SHA")"
+      # id: extract_hash    
+
+    - name: Setup Node
+      uses: actions/setup-node@v3
+      with:
+        node-version: '16.x'
+
+    - name: Install Dependencies
+      run: |
+        node --version
+        yarn install --production
+
+    - name: Build Static Website
+      run: yarn build
+
+    - name: Copy files to the production website with the AWS CLI
+      run: |
+        aws s3 sync --delete ${{ env.DIST }} s3://${{ env.BUCKET }}
+
+    - name: Copy files to the production website with the AWS CLI
+      run: |
+        aws cloudfront create-invalidation \
+          --distribution-id ${{ env.DIST_ID }} \
+          --paths "/*"
